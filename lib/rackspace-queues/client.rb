@@ -36,13 +36,22 @@ module RackspaceQueues
       @token = response.body["access"]["token"]["id"]
       url_type = @internal ? "internalURL" : "publicURL"
       queues = response.body["access"]["serviceCatalog"].select{|service| service["name"] == "cloudQueues" }
-      url = queues[0]["endpoints"][0][url_type].split('/')
+      endpoints = queues[0]["endpoints"]
+
+      url = if @region.nil?
+              # pick the first region
+              # TODO when cloud queues goes GA, change this to response.body["access"]["user"]["RAX-AUTH:defaultRegion"]
+              endpoints[0][url_type].split('/')
+            else
+              endpoint = endpoints.select { |endpoint| endpoint["region"] == @region.to_s.upcase }
+              raise ArgumentError.new "Region #{@region.to_s.upcase} does not exist!" if endpoint.count == 0
+              endpoint[0][url_type].split('/')
+            end
   
       host = url[0..2].join('/')
       @base_path = "/" + url[3..-1].join('/')
       @tenant = url[-1]
   
-      # TODO support region selection
       @client = Excon.new(host)
     end
   
@@ -63,7 +72,7 @@ module RackspaceQueues
       options[:tcp_nodelay] = true if options[:tcp_nodelay].nil?
       options[:expects] ||= 200
   
-      puts options
+      puts options if @debug
   
       begin
         response = @client.request(options)
