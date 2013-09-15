@@ -1,7 +1,7 @@
 module RackspaceQueues
   class Queue
 
-    attr :default_ttl
+    attr_accessor :default_ttl
 
     def initialize(client, name)
       @client = client
@@ -19,9 +19,9 @@ module RackspaceQueues
       end
 
       options = options.select { |opt| allowed_query.include?(opt.to_s) }
-      msgs = @client.request(method: :get, path: "#{path}/messages", expects: [200, 204], query: options)
-      return [] if msgs.code == 204
-      process_messages(msgs.body["messages"])
+      response = @client.request(method: :get, path: "#{path}/messages", expects: [200, 204], query: options)
+      return [] if response.code == 204
+      process_messages(response.body["messages"])
     end
 
     def get(id, options = {})
@@ -50,7 +50,16 @@ module RackspaceQueues
 
       # TODO this should probably do something with a body["partial"] == true response
       resources = @client.request(method: :post, path: "#{path}/messages", body: msgs, expects: 201).body["resources"]
-      resources.map { |resource| resource.split('/')[-1] }
+      resources.map { |resource| URI.parse(resource).path.split('/')[-1] }
+    end
+
+    def claim(options = {})
+      query = options[:limit] ? {limit: options[:limit]} : {}
+      options = options.select { |opt| %w[ttl grace].include?(opt.to_s) }
+      response = @client.request(method: :post, path: "#{path}/claims", body: options, query: query, expects: [200, 204])
+      return [] if response.code == 204
+      claim_id = URI.parse(response.get_header("Location")).path.split('/')[-1]
+      process_claim(claim_id, response.body)
     end
 
     def delete_messages(*ids)
@@ -102,6 +111,10 @@ module RackspaceQueues
 
     def process_messages(msgs)
       msgs.map { |message| Message.new(self, message) }
+    end
+
+    def process_claim(claim_id, msgs)
+      Claim.new(self, claim_id, process_messages(msgs))
     end
 
   end
