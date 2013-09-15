@@ -32,18 +32,19 @@ module RackspaceQueues
 
     def put(*msgs)
       msgs = msgs.map do |message|
-        if message.class == Message
-          message.to_hash
-        elsif (message[:body] or message["body"]) rescue false
-          {
-            ttl: message[:ttl] || message["ttl"] || @default_ttl,
-            body: message[:body] || message["body"],
-          }
-        else
-          {
-            ttl: @default_ttl,
-            body: message,
-          }
+        begin
+          if message.class == Message
+            message.to_hash
+          elsif message[:body] or message["body"]
+            {
+              ttl: message[:ttl] || message["ttl"] || @default_ttl,
+              body: message[:body] || message["body"],
+            }
+          else
+            { ttl: @default_ttl, body: message }
+          end
+        rescue
+          { ttl: @default_ttl, body: message }
         end
       end
 
