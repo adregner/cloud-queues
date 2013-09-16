@@ -1,0 +1,3 @@
+--color
+--order default
+--format documentation

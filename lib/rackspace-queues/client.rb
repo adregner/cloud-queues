@@ -1,5 +1,7 @@
 module RackspaceQueues
   class Client
+
+    attr_accessor :client_id
   
     def initialize(options = {})
       [:username, :api_key].each do |arg|
@@ -23,6 +25,7 @@ module RackspaceQueues
     end
   
     def queues
+      # TODO paging?
       request(method: :get, path: "/queues").body["queues"].map do |queue|
         Queue.new(self, queue["name"])
       end
@@ -83,7 +86,11 @@ module RackspaceQueues
         return request(options, true)
       end
 
-      response.body = JSON.load(response.body) if (response.get_header("Content-Type") || "").include?("application/json")
+      begin
+        response.body = JSON.load(response.body) if (response.get_header("Content-Type") || "").include?("application/json")
+      rescue
+        # the api seems to like to give a json content type for a "204 no content" response
+      end
 
       return response
     end

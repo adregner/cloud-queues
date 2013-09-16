@@ -3,6 +3,8 @@ module RackspaceQueues
 
     attr_accessor :default_ttl
 
+    attr_reader :name
+
     def initialize(client, name)
       @client = client
       @name = name

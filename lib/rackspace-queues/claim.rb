@@ -14,6 +14,8 @@ module RackspaceQueues
       @default_ttl = 43200 # 12 hours, server max
     end
 
+    # TODO def queue
+
     def age
       refresh["age"]
     end
@@ -44,7 +46,7 @@ module RackspaceQueues
     def delete
       @client.request(method: :delete, path: path, expects: 204) && true
     end
-    alias_method :delete, :release
+    alias_method :release, :delete
 
     def path
       "/queues/#{@queue}/claims/#{@id}"

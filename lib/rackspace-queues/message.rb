@@ -1,6 +1,8 @@
 module RackspaceQueues
   class Message
 
+    attr_reader :id, :body
+
     def initialize(queue, message, extra = nil)
       unless queue.class == Queue
         # when a Claim object builds a Message
@@ -23,6 +25,11 @@ module RackspaceQueues
     def delete!
       @client.request(method: :delete, path: path, expects: 204) && true
     end
+
+    # TODO def queue
+    # TODO def claim
+    # TODO def age
+    # TODO def ttl
 
     def to_hash
       {ttl: @ttl, body: @body}

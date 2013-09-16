@@ -1,4 +1,5 @@
-gem 'excon', '~> 0.25.0'
+require 'excon'
+
 require 'json'
 require 'socket'
 require 'uri'
