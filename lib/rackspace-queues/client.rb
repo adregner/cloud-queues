@@ -87,7 +87,7 @@ module RackspaceQueues
         @client.reset
         return request(options, true)
       rescue Excon::Errors::BadRequest => e
-        raise if second_try or @token.nil? or response.status != 401
+        raise if second_try or @token.nil? or response.nil? or response.status != 401
 
         # Our @token probably expired, re-auth and try again
         authenticate!

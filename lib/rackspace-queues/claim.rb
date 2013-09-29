@@ -14,7 +14,9 @@ module RackspaceQueues
       @default_ttl = 43200 # 12 hours, server max
     end
 
-    # TODO def queue
+    def queue
+      Queue.new(@client, @queue)
+    end
 
     def age
       refresh["age"]
@@ -34,7 +36,7 @@ module RackspaceQueues
 
     def messages
       msgs = refresh["messages"]
-      @messages = msgs.map { |message| Message.new(@client, @queue, message) }
+      @messages = msgs.map { |message| Message.new(queue, message) }
     end
 
     def update(options = {})

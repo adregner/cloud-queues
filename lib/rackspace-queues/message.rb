@@ -3,16 +3,9 @@ module RackspaceQueues
 
     attr_reader :id, :body
 
-    def initialize(queue, message, extra = nil)
-      unless queue.class == Queue
-        # when a Claim object builds a Message
-        @client = queue
-        @queue = message
-        message = extra
-      else
-        @client = queue.client
-        @queue = queue.name
-      end
+    def initialize(queue, message)
+      @client = queue.client
+      @queue = queue.name
 
       href = URI.parse(message["href"])
       @id = href.path.split('/')[-1]

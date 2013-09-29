@@ -3,13 +3,18 @@ module RackspaceQueues
 
     attr_accessor :default_ttl
 
-    attr_reader :name
+    attr_reader :name, :client
 
     def initialize(client, name)
       @client = client
       @name = name
 
+      # TODO maybe make these defaults on the client or something, this isn't going
+      # to always work out the way we want
       @default_ttl = 1209600 # 14 days, server max
+
+      @default_claim_ttl = 43200 # 12 hours, server max
+      @default_claim_grace = 300 # 5 minutes, arbitrary
     end
 
     def messages(options = {})
@@ -22,7 +27,7 @@ module RackspaceQueues
 
       options = options.select { |opt| allowed_query.include?(opt.to_s) }
       response = @client.request(method: :get, path: "#{path}/messages", expects: [200, 204], query: options)
-      return [] if response.code == 204
+      return [] if response.status == 204
       process_messages(response.body["messages"])
     end
 
@@ -57,9 +62,12 @@ module RackspaceQueues
 
     def claim(options = {})
       query = options[:limit] ? {limit: options[:limit]} : {}
-      options = options.select { |opt| %w[ttl grace].include?(opt.to_s) }
-      response = @client.request(method: :post, path: "#{path}/claims", body: options, query: query, expects: [200, 204])
-      return [] if response.code == 204
+      body = {
+        ttl: options[:ttl] || options["ttl"] || @default_claim_ttl,
+        grace: options[:grace] || options["grace"] || @default_claim_grace,
+      }
+      response = @client.request(method: :post, path: "#{path}/claims", body: body, query: query, expects: 201)
+      return [] if response.status == 204
       claim_id = URI.parse(response.get_header("Location")).path.split('/')[-1]
       process_claim(claim_id, response.body)
     end
