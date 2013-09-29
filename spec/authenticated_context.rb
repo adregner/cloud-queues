@@ -8,14 +8,27 @@ class ClientWarehouse
     @house = {}
   end
 
-  def get(args)
-    @house[args[:username]] ||= RackspaceQueues::Client.new args
+  def get(args = {})
+    key = args[:region] || :default
+    return @house[key] if @house.include?(key)
+    @house[key] = build(key)
+  end
+
+  def build(key)
+    args = YAML.load_file(File.realpath("../../.rackspace-spec-creds", __FILE__))
+    args.merge! region: key unless key == :default
+    RackspaceQueues::Client.new(args)
   end
 end
 
-shared_context "authenticated as rackspace cloud user", region: nil do
+shared_context "authenticated as rackspace cloud user" do
   let(:client) do
-    args = YAML.load_file(File.realpath("../../.rackspace-spec-creds", __FILE__))
-    ClientWarehouse.instance.get(args)
+    ClientWarehouse.instance.get
   end
 end
+
+#shared_context "new queue" do
+#  client = ClientWarehouse.instance.get
+#  queue = client.create(Faker::Lorem.words.join('-'))
+#  let(:queue) { queue }
+#end
