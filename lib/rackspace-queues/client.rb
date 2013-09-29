@@ -11,7 +11,7 @@ module RackspaceQueues
       @client_id = Socket.gethostname
   
       options.each_pair {|k, v| instance_variable_set("@#{k}".to_sym, v) }
-      auth = authenticate!
+      authenticate!
     end
   
     def create(name)
@@ -81,8 +81,17 @@ module RackspaceQueues
         response = @client.request(options)
       rescue Excon::Errors::SocketError => e
         raise unless e.message.include?("EOFError") or second_try
-        puts "Excon::Errors::SocketError EOFError" #, options
+
+        # this happens when the server closes the keep-alive socket and
+        # Excon doesn't realize it yet.
         @client.reset
+        return request(options, true)
+      rescue Excon::Errors::BadRequest => e
+        raise if second_try or @token.nil? or response.status != 401
+
+        # Our @token probably expired, re-auth and try again
+        authenticate!
+        @client.reset # for good measure
         return request(options, true)
       end
 
