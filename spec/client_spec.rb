@@ -42,6 +42,26 @@ describe RackspaceQueues::Client do
       expect(client.client_id).to eq(new_client_id)
     end
 
+    it "will re-authenticate if the token is poisioned" do
+      original_token = client.token
+      client.token = "foobar"
+      expect(client.token).to eq("foobar")
+
+      expect(client.queues).to be_an_instance_of(Array)
+      client.token.should_not eq("foobar")
+      # the auth API will sometimes re-issue the same token, so we can't compare to original_token
+    end
+
+    it "can be constructed with a valid token and tenant" do
+      token = client.token
+      tenant = client.tenant
+
+      new_client = RackspaceQueues::Client.new token: token, tenant: tenant
+
+      expect(new_client).to be_an_instance_of(RackspaceQueues::Client)
+      client.client_id.should_not eq(new_client.client_id)
+    end
+
     describe "managing queues" do
       queue_name = Faker::Lorem.words.join
 

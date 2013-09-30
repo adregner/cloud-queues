@@ -48,6 +48,11 @@ describe "working with a queue" do
       expect(metadata['numbers']).to eq(number)
     end
 
+    it "can set metadata in bulk" do
+      new_data = {apples: "with carmel", bananas: "are soft"}
+      @queue.metadata = new_data
+    end
+
     context "should accept a string message" do
       subject { @queue.put("Hello world.") }
       include_examples "message id collection", 1
