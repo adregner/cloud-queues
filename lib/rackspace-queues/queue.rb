@@ -73,7 +73,7 @@ module RackspaceQueues
     end
 
     def delete_messages(*ids)
-      ids = options[:ids].join(',')
+      ids = ids.join(',')
       @client.request(method: :delete, path: "#{path}/messages", expects: 204, query: {ids: ids}) && true
     end
 
