@@ -2,11 +2,13 @@ module RackspaceQueues
   class Client
 
     attr_accessor :client_id
+    attr_accessor :token
+    attr_accessor :tenant
   
     def initialize(options = {})
       [:username, :api_key].each do |arg|
         raise ArgumentError.new "#{arg} is a required argument." unless options[arg]
-      end
+      end if options[:token].nil? and options[:tenant].nil?
   
       @client_id = Socket.gethostname
   
@@ -33,10 +35,18 @@ module RackspaceQueues
   
     def authenticate!
       @client = Excon.new("https://identity.api.rackspacecloud.com")
-      request = {auth: {"RAX-KSKEY:apiKeyCredentials" => {username: @username, apiKey: @api_key}}}
-      response = request(method: :post, path: "/v2.0/tokens", body: request)
-  
-      @token = response.body["access"]["token"]["id"]
+      @base_path = nil
+
+      if @token.nil?
+        request = {auth: {"RAX-KSKEY:apiKeyCredentials" => {username: @username, apiKey: @api_key}}}
+        response = request(method: :post, path: "/v2.0/tokens", body: request)
+        @token = response.body["access"]["token"]["id"]
+      else
+        # try the current token
+        request = {auth: {tenantId: @tenant, token: {id: @token}}}
+        response = request(method: :post, path: "/v2.0/tokens", body: request)
+      end
+
       url_type = @internal ? "internalURL" : "publicURL"
       queues = response.body["access"]["serviceCatalog"].select{|service| service["name"] == "cloudQueues" }
       endpoints = queues[0]["endpoints"]
@@ -86,10 +96,11 @@ module RackspaceQueues
         # Excon doesn't realize it yet.
         @client.reset
         return request(options, true)
-      rescue Excon::Errors::BadRequest => e
-        raise if second_try or @token.nil? or response.nil? or response.status != 401
+      rescue Excon::Errors::Unauthorized => e
+        raise if second_try or @token.nil?
 
         # Our @token probably expired, re-auth and try again
+        @token = nil
         authenticate!
         @client.reset # for good measure
         return request(options, true)
