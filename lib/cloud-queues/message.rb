@@ -1,4 +1,4 @@
-module RackspaceQueues
+module CloudQueues
   class Message
 
     attr_reader :id, :body

@@ -4,7 +4,7 @@ require 'authenticated_context'
 describe "working with messages" do
   include_context "authenticated as rackspace cloud user"
 
-  describe RackspaceQueues::Message do
+  describe CloudQueues::Message do
     before do
       @name = Faker::Lorem.words.join('-')
       @queue = client.create @name
@@ -15,7 +15,7 @@ describe "working with messages" do
     context "existing messages" do
       it "should have some messages" do
         expect(@queue.total).to eq(1)
-        expect(@message).to be_an_instance_of(RackspaceQueues::Message)
+        expect(@message).to be_an_instance_of(CloudQueues::Message)
       end
 
       it "should access the body as if the message were a Hash" do

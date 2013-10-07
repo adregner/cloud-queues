@@ -1,4 +1,4 @@
-module RackspaceQueues
+module CloudQueues
   class Queue
 
     attr_accessor :default_ttl

@@ -1,4 +1,4 @@
-module RackspaceQueues
+module CloudQueues
   class Client
 
     attr_accessor :client_id

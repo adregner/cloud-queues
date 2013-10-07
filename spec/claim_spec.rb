@@ -17,7 +17,7 @@ describe "claiming messages" do
     expect(@queue.claimed).to eq(0)
   end
 
-  describe RackspaceQueues::Claim do
+  describe CloudQueues::Claim do
     before { @claim = @queue.claim limit: 2 }
 
     context "existing messages" do
@@ -32,7 +32,7 @@ describe "claiming messages" do
         @claim.age.should be < 10
 
         @claim.each do |message|
-          expect(message).to be_an_instance_of(RackspaceQueues::Message)
+          expect(message).to be_an_instance_of(CloudQueues::Message)
           expect(message.body).to be_an_instance_of(String)
         end
       end

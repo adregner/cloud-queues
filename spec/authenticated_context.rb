@@ -17,7 +17,7 @@ class ClientWarehouse
   def build(key)
     args = YAML.load_file(File.realpath("../../.rackspace-spec-creds", __FILE__))
     args.merge! region: key unless key == :default
-    RackspaceQueues::Client.new(args)
+    CloudQueues::Client.new(args)
   end
 end
 

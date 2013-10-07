@@ -1,4 +1,4 @@
-rackspace-queues
+cloud-queues
 ================
 
-Basic ruby interface into Rackspace Cloud Queues
+Basic (unoffical) ruby interface into Rackspace Cloud Queues

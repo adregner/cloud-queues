@@ -1,7 +1,7 @@
 require 'bundler/setup'
 require 'simplecov'
 SimpleCov.start
-require 'rackspace-queues'
+require 'cloud-queues'
 
 require 'ffaker'
 

@@ -1,4 +1,4 @@
-module RackspaceQueues
+module CloudQueues
   class Claim
     include Enumerable
 

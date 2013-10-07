@@ -1,13 +1,13 @@
 require 'spec_helper'
 require 'authenticated_context'
 
-describe RackspaceQueues do
+describe CloudQueues do
   it "should have a version number" do
-    RackspaceQueues::VERSION.class.should eq(String)
+    CloudQueues::VERSION.class.should eq(String)
   end
 end
 
-describe RackspaceQueues::Client do
+describe CloudQueues::Client do
   include_context "authenticated as rackspace cloud user"
 
   it "should error without credentials" do
@@ -29,7 +29,7 @@ describe RackspaceQueues::Client do
 
   context "instance" do
     it "should be signed in" do
-      expect(client).to be_an_instance_of(RackspaceQueues::Client)
+      expect(client).to be_an_instance_of(CloudQueues::Client)
     end
 
     it "should have a client id" do
@@ -56,9 +56,9 @@ describe RackspaceQueues::Client do
       token = client.token
       tenant = client.tenant
 
-      new_client = RackspaceQueues::Client.new token: token, tenant: tenant
+      new_client = CloudQueues::Client.new token: token, tenant: tenant
 
-      expect(new_client).to be_an_instance_of(RackspaceQueues::Client)
+      expect(new_client).to be_an_instance_of(CloudQueues::Client)
       client.client_id.should_not eq(new_client.client_id)
     end
 
@@ -66,18 +66,18 @@ describe RackspaceQueues::Client do
       queue_name = Faker::Lorem.words.join
 
       it "can create a queue" do
-        expect(client.create(queue_name)).to be_an_instance_of(RackspaceQueues::Queue)
+        expect(client.create(queue_name)).to be_an_instance_of(CloudQueues::Queue)
       end
 
       it "can get a queue" do
-        expect(client.get(queue_name)).to be_an_instance_of(RackspaceQueues::Queue)
+        expect(client.get(queue_name)).to be_an_instance_of(CloudQueues::Queue)
       end
 
       it "can list all queues" do
         queues = client.queues
         queues.length.should be > 0
         queues.each do |queue|
-          expect(queue).to be_an_instance_of(RackspaceQueues::Queue)
+          expect(queue).to be_an_instance_of(CloudQueues::Queue)
         end
       end
 
@@ -91,6 +91,6 @@ describe RackspaceQueues::Client do
 
   it "should return a requested region" do
     # TODO when Cloud Queues goes GA, change this to something strange like "SYD"
-    expect(ClientWarehouse.instance.get(region: :ord)).to be_an_instance_of(RackspaceQueues::Client)
+    expect(ClientWarehouse.instance.get(region: :ord)).to be_an_instance_of(CloudQueues::Client)
   end
 end
