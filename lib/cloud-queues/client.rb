@@ -28,9 +28,11 @@ module CloudQueues
   
     def queues
       # TODO paging?
-      request(method: :get, path: "/queues").body["queues"].map do |queue|
+      request(method: :get, path: "/queues", expects: [200, 204]).body["queues"].map do |queue|
         Queue.new(self, queue["name"])
       end
+    rescue NoMethodError # undefined method `map' for nil:NilClass
+      []
     end
   
     def authenticate!
