@@ -38,6 +38,8 @@ module CloudQueues
     end
 
     def put(*msgs)
+      raise ArgumentError.new("Only 10 or less messages may be given at once") if msgs.count > 10
+
       msgs = msgs.map do |message|
         begin
           if message.class == Message

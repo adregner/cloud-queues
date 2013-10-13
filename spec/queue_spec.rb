@@ -63,6 +63,11 @@ describe "working with a queue" do
       include_examples "message id collection", 5
     end
 
+    it "should not accept more then 10 messages at once" do
+      expect { @queue.put 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten',
+        'too many' }.to raise_error(ArgumentError, "Only 10 or less messages may be given at once")
+    end
+
     context "should accept a structured message" do
       subject { @queue.put(ttl: 7*86400, body: "You have 1 week to change your password.") }
       include_examples "message id collection", 1

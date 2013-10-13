@@ -8,12 +8,12 @@ describe "claiming messages" do
     # TODO handle deprecated behavior here somehow (let(:client) inside a before(:all))
     @name = Faker::Lorem.words.join('-')
     @queue = client.create @name
-    @queue.put *%w[a b c d e f g h i j k l]
+    @message_ids = @queue.put *%w[a b c d e f g h i j]
   end
 
   it "should have messages with no claims" do
-    expect(@queue.free).to eq(12)
-    expect(@queue.total).to eq(12)
+    expect(@queue.free).to eq(10)
+    expect(@queue.total).to eq(10)
     expect(@queue.claimed).to eq(0)
   end
 
@@ -22,7 +22,7 @@ describe "claiming messages" do
 
     context "existing messages" do
       it "should have some messages" do
-        expect(@queue.total).to eq(12)
+        expect(@queue.total).to eq(10)
       end
 
       it "can claim 2 messages" do
@@ -37,22 +37,22 @@ describe "claiming messages" do
         end
       end
 
-      it "should update its stats" do
-        expect(@queue.free).to eq(10)
-        expect(@queue.total).to eq(12)
+      it "can be deleted and update its stats" do
+        expect(@queue.free).to eq(8)
+        expect(@queue.total).to eq(10)
         expect(@queue.claimed).to eq(2)
 
         @claim.delete
 
-        expect(@queue.free).to eq(12)
-        expect(@queue.total).to eq(12)
+        expect(@queue.free).to eq(10)
+        expect(@queue.total).to eq(10)
         expect(@queue.claimed).to eq(0)
       end
 
       it "can have two claims" do
         another_claim = @queue.claim limit: 5
         expect(another_claim.count).to eq(5)
-        expect(@queue.free).to eq(5)
+        expect(@queue.free).to eq(3)
         expect(@queue.claimed).to eq(7)
         another_claim.delete
       end
@@ -63,11 +63,11 @@ describe "claiming messages" do
 
         # Claim#messages is called to refresh the list of avaliable messages
         expect(@claim.messages.count).to eq(1)
-        expect(@queue.total).to eq(11)
-        expect(@queue.free).to eq(10)
+        expect(@queue.total).to eq(9)
+        expect(@queue.free).to eq(8)
 
         remaining = @queue.claim # default limit should be 10
-        expect(remaining.count).to eq(10)
+        expect(remaining.count).to eq(8)
         expect(remaining.collect{|message| message.body } + [@claim.first.body]).to_not include(consumed.body)
       end
 
