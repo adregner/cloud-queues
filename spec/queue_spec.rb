@@ -117,6 +117,30 @@ describe "working with a queue" do
       expect { @queue.messages ids: 21.times.map{|n| n} }.to raise_error(ArgumentError, "Only 20 or less message IDs may be specified")
     end
 
+    # This is really here to test the CloudQueues::Client#request_all functionality
+    context "a lot of messages" do
+      subject do
+        8.times { @queue.put(*(Faker::Lorem.words + Faker::Lorem.words + Faker::Lorem.words)) }
+      end
+
+      it "has a large total" do
+        subject
+        expect(@queue.total).to be == 72
+      end
+
+      it "can get all those messages" do
+        subject
+        expect(@queue.messages(echo: true).count).to be == 72
+      end
+
+      it "will still only get a smaller number of messages" do
+        subject
+        expect(@queue.messages(echo: true, limit: 24).count).to eq(30)
+        expect(@queue.messages(echo: true, limit: 4).count).to eq(4)
+      end
+
+    end
+
     context "a short and a long lived message" do
       subject(:message_ids) { @queue.put("something long", {body:"something short", ttl:60}) }
 

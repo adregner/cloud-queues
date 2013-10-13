@@ -36,7 +36,8 @@ module CloudQueues
         options = query
       end
 
-      response = @client.request(method: :get, path: "#{path}/messages", expects: [200, 204], query: options)
+      response = @client.request_all(options.class == String ? nil : "messages",
+                                     method: :get, path: "#{path}/messages", expects: [200, 204], query: options)
       return [] if response.status == 204
       response.body.class == Hash ? process_messages(response.body["messages"]) : process_messages(response.body)
     end

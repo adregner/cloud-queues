@@ -27,8 +27,7 @@ module CloudQueues
     end
   
     def queues
-      # TODO paging?
-      response = request(method: :get, path: "/queues", expects: [200, 204])
+      response = request_all("queues", method: :get, path: "/queues", expects: [200, 204])
 
       return [] if response.status == 204
 
@@ -117,6 +116,51 @@ module CloudQueues
       end
 
       return response
+    end
+
+    def request_all(collection_key, options = {})
+      begin
+        absolute_limit = options[:query][:limit]
+        limit = [absolute_limit, 10].min
+        options[:query][:limit] = limit if options[:query][:limit]
+      rescue
+        absolute_limit = Float::INFINITY
+        limit = 10
+      end
+
+      response = request(options)
+
+      if collection_key and response.status != 204
+        # the next href link will have the query represented in it
+        options.delete :query
+
+        collection = response.body[collection_key]
+
+        while response.body[collection_key].count >= limit and collection.count < absolute_limit
+          next_link = response.body["links"].select{|l| l["rel"] == "next" }[0]["href"]
+          options[:path] = set_query_from(options[:path], next_link)
+
+          response = request(options)
+
+          break if response.status == 204
+          collection += response.body[collection_key]
+        end
+
+        response.body[collection_key] = collection
+      end
+
+      return response
+    end
+
+    private
+
+    # I would just like to comment that this is only necessary because the API does not return the correct
+    # href for the next page.  The tenant id (account number) is missing from between the /v1 and /queues.
+    def set_query_from(original, new_uri)
+      original = URI.parse(original)
+      new_query = URI.parse(new_uri).query
+      original.query = new_query
+      return original.to_s
     end
   
   end
