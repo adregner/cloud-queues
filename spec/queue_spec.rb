@@ -100,21 +100,18 @@ describe "working with a queue" do
       end
     end
 
-    # this is failing somehow..
-    #it "can delete messages in bulk" do
-    #  message_ids = @queue.put 'a', 'b', 'c'
+    it "can get and delete messages in bulk" do
+      message_ids = @queue.put 'a', 'b', 'c'
 
-    #  messages = @queue.messages
-    #  puts messages.inspect
-    #  expect(messages.count).to eq(3)
-    #  expect(@queue.delete_messages(*message_ids[0..1])).to be(true)
-    #  messages = @queue.messages
-    #  puts messages.inspect
-    #  expect(messages.count).to eq(1)
+      messages = @queue.messages ids: message_ids
+      expect(messages.count).to eq(3)
+      expect(@queue.delete_messages(*message_ids[0..1])).to be(true)
+      messages = @queue.messages ids: message_ids
+      expect(messages.count).to eq(1)
 
-    #  message = @queue.get(message_ids[2])
-    #  expect(message.body).to eq('c')
-    #end
+      message = @queue.get(message_ids[2])
+      expect(message.body).to eq('c')
+    end
 
     context "a short and a long lived message" do
       subject(:message_ids) { @queue.put("something long", {body:"something short", ttl:60}) }

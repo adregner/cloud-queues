@@ -20,15 +20,24 @@ module CloudQueues
     def messages(options = {})
       if options[:ids]
         allowed_query = %w[ids claim_id]
-        options[:ids] = options[:ids].join(',') if options[:ids].class == Array
       else
         allowed_query = %w[marker limit echo include_claimed]
       end
 
       options = options.select { |opt| allowed_query.include?(opt.to_s) }
+
+      # Excon likes to CGI.escape values in a query hash, so this has to be handled manually
+      if options[:ids]
+        query = "?ids=#{options.delete(:ids).join(',')}"
+        options.each_pair do |key, value|
+          query << "&#{key}=#{CGI.escape(value)}"
+        end
+        options = query
+      end
+
       response = @client.request(method: :get, path: "#{path}/messages", expects: [200, 204], query: options)
       return [] if response.status == 204
-      process_messages(response.body["messages"])
+      response.body.class == Hash ? process_messages(response.body["messages"]) : process_messages(response.body)
     end
 
     def get(id, options = {})
@@ -75,8 +84,8 @@ module CloudQueues
     end
 
     def delete_messages(*ids)
-      ids = ids.join(',')
-      @client.request(method: :delete, path: "#{path}/messages", expects: 204, query: {ids: ids}) && true
+      query = "?ids=#{ids.join(',')}"
+      @client.request(method: :delete, path: "#{path}/messages", expects: 204, query: query) && true
     end
 
     def delete!
