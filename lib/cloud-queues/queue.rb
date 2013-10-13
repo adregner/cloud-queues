@@ -78,7 +78,7 @@ module CloudQueues
         ttl: options[:ttl] || options["ttl"] || @default_claim_ttl,
         grace: options[:grace] || options["grace"] || @default_claim_grace,
       }
-      response = @client.request(method: :post, path: "#{path}/claims", body: body, query: query, expects: 201)
+      response = @client.request(method: :post, path: "#{path}/claims", body: body, query: query, expects: [201, 204])
       return [] if response.status == 204
       claim_id = URI.parse(response.get_header("Location")).path.split('/')[-1]
       process_claim(claim_id, response.body)

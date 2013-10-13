@@ -25,7 +25,7 @@ describe "claiming messages" do
         expect(@queue.total).to eq(10)
       end
 
-      it "can claim 2 messages" do
+      it "can claim 2 messages and enumerate the claim" do
         expect(@claim).to be_an_instance_of(described_class)
         expect(@claim.count).to eq(2)
         @claim.ttl.should be > 1
@@ -84,6 +84,14 @@ describe "claiming messages" do
         remaining = @queue.claim # default limit should be 10
         expect(remaining.count).to eq(8)
         expect(remaining.collect{|message| message.body } + [@claim.first.body]).to_not include(consumed.body)
+      end
+
+      it "doesn't fail when there are no messages" do
+        @queue.delete_messages *@message_ids
+        empty_claim = @queue.claim
+
+        expect(empty_claim).to be_an_instance_of(Array)
+        expect(empty_claim.count).to eq(0)
       end
 
       after { @claim.delete rescue nil }
