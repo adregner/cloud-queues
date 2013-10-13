@@ -10,7 +10,7 @@ module CloudQueues
         raise ArgumentError.new "#{arg} is a required argument." unless options[arg]
       end if options[:token].nil? and options[:tenant].nil?
   
-      @client_id = Socket.gethostname
+      @client_id = SecureRandom.uuid
   
       options.each_pair {|k, v| instance_variable_set("@#{k}".to_sym, v) }
       authenticate!

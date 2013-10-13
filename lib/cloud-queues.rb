@@ -1,8 +1,8 @@
 require 'excon'
 
 require 'json'
-require 'socket'
 require 'uri'
+require 'securerandom'
 
 require_relative "cloud-queues/version"
 require_relative "cloud-queues/client"

@@ -37,7 +37,7 @@ describe CloudQueues::Client do
     end
 
     it "can change the client id" do
-      new_client_id = "#{Faker::Lorem.words.join}.rspec.local"
+      new_client_id = SecureRandom.uuid
       client.client_id = new_client_id
       expect(client.client_id).to eq(new_client_id)
     end
