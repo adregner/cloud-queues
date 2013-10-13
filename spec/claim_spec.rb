@@ -49,6 +49,21 @@ describe "claiming messages" do
         expect(@queue.claimed).to eq(0)
       end
 
+      it "can refresh the claim" do
+        expect(@claim.ttl).to eq(@claim.default_ttl)
+        @claim.update(ttl: 200)
+        expect(@claim.ttl).to eq(200)
+      end
+
+      it "can get specific messages within the claim" do
+        unclaimed_id = @queue.messages(echo: true)[-1].id
+        claimed_ids = @claim.messages.collect{|message| message.id }
+
+        # I'm not sure what the expected return from the server is, but at least
+        # this will test that one last line of code in queue.rb
+        expect(@queue.messages(ids: claimed_ids + [unclaimed_id], claim_id: @claim.id).count).to eq(claimed_ids.count + 1)
+      end
+
       it "can have two claims" do
         another_claim = @queue.claim limit: 5
         expect(another_claim.count).to eq(5)

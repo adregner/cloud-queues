@@ -4,6 +4,8 @@ module CloudQueues
 
     attr_accessor :default_ttl
 
+    attr_reader :id
+
     def initialize(queue, id, messages)
       @client = queue.client
       @queue = queue.name
