@@ -65,6 +65,12 @@ describe CloudQueues::Client do
     describe "managing queues" do
       queue_name = Faker::Lorem.words.join
 
+      # the line of code this is intended to test is dependent on if the cloud account
+      # being used has any pre-existing queues.  if it does, the test is pointless.
+      it "can maybe list zero queues" do
+        expect(client.queues.length).to be >= 0
+      end
+
       it "can create a queue" do
         expect(client.create(queue_name)).to be_an_instance_of(CloudQueues::Queue)
       end
