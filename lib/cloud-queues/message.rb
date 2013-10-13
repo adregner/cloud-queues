@@ -19,14 +19,20 @@ module CloudQueues
       @client.request(method: :delete, path: path, expects: 204) && true
     end
 
-    # TODO def queue
-    # TODO def claim
-    # TODO def age
-    # TODO def ttl
+    def queue
+      Queue.new(@client, @queue)
+    end
+
+    def claim
+      @claim.nil? ? nil : Claim.new(queue, @claim, nil)
+    end
 
     def to_hash
       {ttl: @ttl, body: @body}
     end
+
+    def age; @age; end
+    def ttl; @ttl; end
 
     # beware using this path method.  it could return a path with a query argument
     # at the end.  this is to ensure the claim_id is provided whenever operations

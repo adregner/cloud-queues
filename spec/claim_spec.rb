@@ -37,6 +37,13 @@ describe "claiming messages" do
         end
       end
 
+      it "can access the claim via the message" do
+        message = @claim[0]
+
+        expect(message.claim).to be_an_instance_of(CloudQueues::Claim)
+        expect(message.claim.id).to eq(@claim.id)
+      end
+
       it "can be deleted and update its stats" do
         expect(@queue.free).to eq(8)
         expect(@queue.total).to eq(10)

@@ -6,12 +6,13 @@ module CloudQueues
 
     attr_reader :id
 
-    def initialize(queue, id, messages)
+    def initialize(queue, id, msgs)
       @client = queue.client
       @queue = queue.name
       @id = id
 
-      @messages = messages
+      # request the messages if we don't already have them
+      @messages = msgs || messages
 
       @default_ttl = 43200 # 12 hours, server max
     end
@@ -20,20 +21,12 @@ module CloudQueues
       Queue.new(@client, @queue)
     end
 
-    def age
-      refresh["age"]
-    end
-
-    def ttl
-      refresh["ttl"]
-    end
-
     def each(&block)
       @messages.each(&block)
     end
 
     def [](index)
-      @messages[index]
+      @messages[index] rescue messages[index]
     end
 
     def messages
@@ -55,6 +48,9 @@ module CloudQueues
     def path
       "/queues/#{@queue}/claims/#{@id}"
     end
+
+    def age; refresh["age"]; end
+    def ttl; refresh["ttl"]; end
 
     private
 

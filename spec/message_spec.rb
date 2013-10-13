@@ -23,6 +23,23 @@ describe "working with messages" do
         expect(@message['string']).to eq('pretty dog')
       end
 
+      it "should have some handy methods" do
+        sleep 1 # just to make sure it's old enough
+        @message = @queue.get @message.id
+
+        expect(@message.age).to eq(1)
+        expect(@message.ttl).to eq(@queue.default_ttl)
+      end
+
+      it "shouldn't have a claim" do
+        expect(@message.claim).to be_nil
+      end
+
+      it "should have a queue" do
+        expect(@message.queue).to be_an_instance_of(CloudQueues::Queue)
+        expect(@message.queue.name).to eq(@name)
+      end
+
     end
 
     after do
