@@ -121,9 +121,8 @@ describe "working with a queue" do
       subject(:message_ids) { @queue.put("something long", {body:"something short", ttl:60}) }
 
       it "should not return the short lived message", slow: true do
-        # TODO this should work with @queue.messages(ids: message_ids)
         expect(message_ids.count).to eq(2)
-        messages = @queue.messages echo: true
+        messages = @queue.messages ids: message_ids
         expect(messages.count).to eq(2)
 
         # wait for the short thing to expire
@@ -133,7 +132,7 @@ describe "working with a queue" do
         # From the docs: "To allow for flexibility in storage implementations, the server might
         # not actually delete the message until its age reaches up to (ttl + 60) seconds."
         60.times do
-          messages = @queue.messages echo: true
+          messages = @queue.messages ids: message_ids
           break if messages.count == 1
           sleep 1
         end
