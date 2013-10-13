@@ -113,6 +113,10 @@ describe "working with a queue" do
       expect(message.body).to eq('c')
     end
 
+    it "cannot get more then 20 messages at a time" do
+      expect { @queue.messages ids: 21.times.map{|n| n} }.to raise_error(ArgumentError, "Only 20 or less message IDs may be specified")
+    end
+
     context "a short and a long lived message" do
       subject(:message_ids) { @queue.put("something long", {body:"something short", ttl:60}) }
 

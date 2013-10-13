@@ -19,6 +19,7 @@ module CloudQueues
 
     def messages(options = {})
       if options[:ids]
+        raise ArgumentError.new "Only 20 or less message IDs may be specified" if options[:ids].count > 20
         allowed_query = %w[ids claim_id]
       else
         allowed_query = %w[marker limit echo include_claimed]
