@@ -126,7 +126,14 @@ describe "working with a queue" do
         # this also tests that the client class can re-connect after the keep-alive expires
         sleep 60
 
-        messages = @queue.messages echo: true
+        # From the docs: "To allow for flexibility in storage implementations, the server might
+        # not actually delete the message until its age reaches up to (ttl + 60) seconds."
+        60.times do
+          messages = @queue.messages echo: true
+          break if messages.count == 1
+          sleep 1
+        end
+
         expect(messages.count).to eq(1)
       end
     end
