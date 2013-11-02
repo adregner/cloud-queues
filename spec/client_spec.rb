@@ -96,7 +96,6 @@ describe CloudQueues::Client do
   end
 
   it "should return a requested region" do
-    # TODO when Cloud Queues goes GA, change this to something strange like "SYD"
-    expect(ClientWarehouse.instance.get(region: :ord)).to be_an_instance_of(CloudQueues::Client)
+    expect(ClientWarehouse.instance.get(region: :hkg)).to be_an_instance_of(CloudQueues::Client)
   end
 end
