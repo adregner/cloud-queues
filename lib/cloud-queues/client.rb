@@ -4,6 +4,9 @@ module CloudQueues
     attr_accessor :client_id
     attr_accessor :token
     attr_accessor :tenant
+
+    attr :default_region
+    attr :api_host
   
     def initialize(options = {})
       [:username, :api_key].each do |arg|
@@ -50,25 +53,26 @@ module CloudQueues
         response = request(method: :post, path: "/v2.0/tokens", body: request)
       end
 
+      @default_region = response.body["access"]["user"]["RAX-AUTH:defaultRegion"]
+
       url_type = @internal ? "internalURL" : "publicURL"
       queues = response.body["access"]["serviceCatalog"].select{|service| service["name"] == "cloudQueues" }
       endpoints = queues[0]["endpoints"]
 
-      url = if @region.nil?
-              # pick the first region
-              # TODO when cloud queues goes GA, change this to response.body["access"]["user"]["RAX-AUTH:defaultRegion"]
-              endpoints[0][url_type].split('/')
-            else
-              endpoint = endpoints.select { |endpoint| endpoint["region"] == @region.to_s.upcase }
-              raise ArgumentError.new "Region #{@region.to_s.upcase} does not exist!" if endpoint.count == 0
-              endpoint[0][url_type].split('/')
-            end
-  
-      host = url[0..2].join('/')
+      # default to the account's preferred region
+      unless @region
+        @region = @default_region
+      end
+
+      endpoint = endpoints.select { |endpoint| endpoint["region"] == @region.to_s.upcase }
+      raise ArgumentError.new "Region #{@region.to_s.upcase} does not exist!" if endpoint.count == 0
+      url = endpoint[0][url_type].split('/')
+
+      @api_host = url[0..2].join('/')
       @base_path = "/" + url[3..-1].join('/')
       @tenant = url[-1]
   
-      @client = Excon.new(host)
+      @client = Excon.new(@api_host)
     end
   
     def request(options = {}, second_try = false)

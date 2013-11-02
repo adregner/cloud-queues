@@ -93,9 +93,14 @@ describe CloudQueues::Client do
       end
     end
 
+    it "should default to account's prefered region" do
+      expect(client.api_host).to include("#{client.default_region.downcase}.queues.api.rackspacecloud.com")
+    end
   end
 
   it "should return a requested region" do
-    expect(ClientWarehouse.instance.get(region: :hkg)).to be_an_instance_of(CloudQueues::Client)
+    client_instance = ClientWarehouse.instance.get(region: :hkg)
+    expect(client_instance).to be_an_instance_of(CloudQueues::Client)
+    expect(client_instance.api_host).to include('hkg.queues.api.rackspacecloud.com')
   end
 end
