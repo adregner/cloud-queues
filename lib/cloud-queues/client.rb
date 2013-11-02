@@ -72,7 +72,7 @@ module CloudQueues
       @base_path = "/" + url[3..-1].join('/')
       @tenant = url[-1]
   
-      @client = Excon.new(@api_host)
+      @client = Excon.new(@api_host, tcp_nodelay: true)
     end
   
     def request(options = {}, second_try = false)
@@ -89,7 +89,6 @@ module CloudQueues
       options[:headers]["X-Auth-Token"] = @token if @token
       options[:headers]["X-Project-ID"] = @tenant
   
-      options[:tcp_nodelay] = true if options[:tcp_nodelay].nil?
       options[:expects] ||= 200
   
       puts options if @debug

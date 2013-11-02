@@ -12,6 +12,6 @@ Gem::Specification.new do |s|
 
   s.files = Dir["lib/**/*.rb", "LICENSE*", "README*"]
 
-  s.add_dependency "excon", "~> 0.25.0"
+  s.add_dependency "excon", "> 0.25.0"
   s.add_development_dependency "rspec"
 end
