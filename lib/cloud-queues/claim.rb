@@ -30,8 +30,7 @@ module CloudQueues
     end
 
     def messages
-      msgs = refresh["messages"]
-      @messages = msgs.map { |message| Message.new(queue, message) }
+      @messages = process_messages(refresh)
     end
 
     def update(options = {})
@@ -53,6 +52,10 @@ module CloudQueues
     def ttl; refresh["ttl"]; end
 
     private
+
+    def process_messages(body)
+      Messages.new(queue, body["messages"].map{|msg| Message.new(queue, msg) }, body["links"] )
+    end
 
     def refresh
       @client.request(method: :get, path: path).body

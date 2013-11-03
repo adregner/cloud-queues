@@ -39,13 +39,17 @@ module CloudQueues
       response = @client.request_all(options.class == String ? nil : "messages",
                                      method: :get, path: "#{path}/messages", expects: [200, 204], query: options)
       return [] if response.status == 204
-      response.body.class == Hash ? process_messages(response.body["messages"]) : process_messages(response.body)
+      if response.body.class == Hash
+        return process_messages(response.body["messages"], response.body["links"])
+      else
+        return process_messages(response.body)
+      end
     end
 
     def get(id, options = {})
       options = options[:claim_id] ? {claim_id: options[:claim_id]} : {}
       msgs = @client.request(method: :get, path: "#{path}/messages/#{id}", query: options)
-      process_messages([msgs.body])[0]
+      process_message(msgs.body)
     end
 
     def put(*msgs)
@@ -132,8 +136,12 @@ module CloudQueues
 
     private
 
-    def process_messages(msgs)
-      msgs.map { |message| Message.new(self, message) }
+    def process_messages(msgs, links = nil)
+      Messages.new(self, msgs.map{|msg| process_message(msg) }, links)
+    end
+
+    def process_message(msg)
+      Message.new(self, msg)
     end
 
     def process_claim(claim_id, msgs)
