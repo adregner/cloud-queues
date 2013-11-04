@@ -14,7 +14,7 @@
       <img src="./assets/0.7.1/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" style="display:none;">
-      <div class="timestamp">Generated <abbr class="timeago" title="2013-11-03T15:42:43-05:00">2013-11-03T15:42:43-05:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2013-11-04T12:04:44-05:00">2013-11-04T12:04:44-05:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -25,15 +25,15 @@
      covered at
      <span class="covered_strength">
        <span class="green">
-         17.88
+         18.51
        </span>
     </span> hits/line)
   </h2>
   <a name="AllFiles"></a>
   <div>
     <b>12</b> files in total.
-    <b>504</b> relevant lines. 
-    <span class="green"><b>504</b> lines covered</span> and
+    <b>516</b> relevant lines. 
+    <span class="green"><b>516</b> lines covered</span> and
     <span class="red"><b>0</b> lines missed </span>
   </div>
   <table class="file_list">
@@ -73,11 +73,11 @@
       <tr>
         <td class="strong"><a href="#e5896334fe23dafbd0ec8a0e226f69cdc7b79a34" class="src_link" title="lib/cloud-queues/client.rb">lib/cloud-queues/client.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>170</td>
-        <td>96</td>
-        <td>96</td>
+        <td>173</td>
+        <td>99</td>
+        <td>99</td>
         <td>0</td>
-        <td>49.2</td>
+        <td>49.8</td>
       </tr>
       
       <tr>
@@ -87,17 +87,17 @@
         <td>27</td>
         <td>27</td>
         <td>0</td>
-        <td>80.4</td>
+        <td>86.3</td>
       </tr>
       
       <tr>
         <td class="strong"><a href="#d34487159e5fe796818cc74b1a77a827cf8e5992" class="src_link" title="lib/cloud-queues/messages.rb">lib/cloud-queues/messages.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>42</td>
-        <td>20</td>
-        <td>20</td>
+        <td>47</td>
+        <td>24</td>
+        <td>24</td>
         <td>0</td>
-        <td>13.7</td>
+        <td>12.4</td>
       </tr>
       
       <tr>
@@ -107,7 +107,7 @@
         <td>81</td>
         <td>81</td>
         <td>0</td>
-        <td>41.2</td>
+        <td>43.3</td>
       </tr>
       
       <tr>
@@ -117,7 +117,7 @@
         <td>17</td>
         <td>17</td>
         <td>0</td>
-        <td>9.4</td>
+        <td>9.5</td>
       </tr>
       
       <tr>
@@ -153,11 +153,11 @@
       <tr>
         <td class="strong"><a href="#93fb1ff6b3fa9ba5eb485b45f075370f4afa06fc" class="src_link" title="spec/messages_spec.rb">spec/messages_spec.rb</a></td>
         <td class="green strong">100.0 %</td>
-        <td>40</td>
-        <td>24</td>
-        <td>24</td>
+        <td>47</td>
+        <td>29</td>
+        <td>29</td>
         <td>0</td>
-        <td>2.1</td>
+        <td>2.2</td>
       </tr>
       
       <tr>
@@ -689,8 +689,8 @@
     <h3>lib/cloud-queues/client.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>96</b> relevant lines. 
-      <span class="green"><b>96</b> lines covered</span> and
+      <b>99</b> relevant lines. 
+      <span class="green"><b>99</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -830,14 +830,14 @@
           <code class="ruby">    def create(name)</code>
         </li>
       
-        <li class="covered" data-hits="33" data-linenumber="23">
-          <span class="hits">33</span>
+        <li class="covered" data-hits="34" data-linenumber="23">
+          <span class="hits">34</span>
           
           <code class="ruby">      request(method: :put, path: &quot;/queues/#{name}&quot;, expects: 201)</code>
         </li>
       
-        <li class="covered" data-hits="33" data-linenumber="24">
-          <span class="hits">33</span>
+        <li class="covered" data-hits="34" data-linenumber="24">
+          <span class="hits">34</span>
           
           <code class="ruby">      Queue.new(self, name)</code>
         </li>
@@ -1166,14 +1166,14 @@
           <code class="ruby">    def request(options = {}, second_try = false)</code>
         </li>
       
-        <li class="covered" data-hits="258" data-linenumber="79">
-          <span class="hits">258</span>
+        <li class="covered" data-hits="266" data-linenumber="79">
+          <span class="hits">266</span>
           
           <code class="ruby">      if options[:body] and options[:body].class != String</code>
         </li>
       
-        <li class="covered" data-hits="70" data-linenumber="80">
-          <span class="hits">70</span>
+        <li class="covered" data-hits="72" data-linenumber="80">
+          <span class="hits">72</span>
           
           <code class="ruby">        options[:body] = options[:body].to_json</code>
         </li>
@@ -1190,8 +1190,8 @@
           <code class="ruby">  </code>
         </li>
       
-        <li class="covered" data-hits="258" data-linenumber="83">
-          <span class="hits">258</span>
+        <li class="covered" data-hits="266" data-linenumber="83">
+          <span class="hits">266</span>
           
           <code class="ruby">      options[:path] = &quot;#{@base_path}#{options[:path]}&quot; unless options[:path].start_with?(@base_path)</code>
         </li>
@@ -1202,38 +1202,38 @@
           <code class="ruby">  </code>
         </li>
       
-        <li class="covered" data-hits="258" data-linenumber="85">
-          <span class="hits">258</span>
+        <li class="covered" data-hits="266" data-linenumber="85">
+          <span class="hits">266</span>
           
           <code class="ruby">      options[:headers] ||= {}</code>
         </li>
       
-        <li class="covered" data-hits="258" data-linenumber="86">
-          <span class="hits">258</span>
+        <li class="covered" data-hits="266" data-linenumber="86">
+          <span class="hits">266</span>
           
           <code class="ruby">      options[:headers][&quot;Content-Type&quot;] = &quot;application/json&quot; if options[:body]</code>
         </li>
       
-        <li class="covered" data-hits="258" data-linenumber="87">
-          <span class="hits">258</span>
+        <li class="covered" data-hits="266" data-linenumber="87">
+          <span class="hits">266</span>
           
           <code class="ruby">      options[:headers][&quot;Accept&quot;] = &quot;application/json&quot;</code>
         </li>
       
-        <li class="covered" data-hits="258" data-linenumber="88">
-          <span class="hits">258</span>
+        <li class="covered" data-hits="266" data-linenumber="88">
+          <span class="hits">266</span>
           
           <code class="ruby">      options[:headers][&quot;Client-ID&quot;] = @client_id</code>
         </li>
       
-        <li class="covered" data-hits="258" data-linenumber="89">
-          <span class="hits">258</span>
+        <li class="covered" data-hits="266" data-linenumber="89">
+          <span class="hits">266</span>
           
           <code class="ruby">      options[:headers][&quot;X-Auth-Token&quot;] = @token if @token</code>
         </li>
       
-        <li class="covered" data-hits="258" data-linenumber="90">
-          <span class="hits">258</span>
+        <li class="covered" data-hits="266" data-linenumber="90">
+          <span class="hits">266</span>
           
           <code class="ruby">      options[:headers][&quot;X-Project-ID&quot;] = @tenant</code>
         </li>
@@ -1244,8 +1244,8 @@
           <code class="ruby">  </code>
         </li>
       
-        <li class="covered" data-hits="258" data-linenumber="92">
-          <span class="hits">258</span>
+        <li class="covered" data-hits="266" data-linenumber="92">
+          <span class="hits">266</span>
           
           <code class="ruby">      options[:expects] ||= 200</code>
         </li>
@@ -1256,8 +1256,8 @@
           <code class="ruby">  </code>
         </li>
       
-        <li class="covered" data-hits="258" data-linenumber="94">
-          <span class="hits">258</span>
+        <li class="covered" data-hits="266" data-linenumber="94">
+          <span class="hits">266</span>
           
           <code class="ruby">      puts options if @debug</code>
         </li>
@@ -1268,14 +1268,14 @@
           <code class="ruby">  </code>
         </li>
       
-        <li class="covered" data-hits="258" data-linenumber="96">
-          <span class="hits">258</span>
+        <li class="covered" data-hits="266" data-linenumber="96">
+          <span class="hits">266</span>
           
           <code class="ruby">      begin</code>
         </li>
       
-        <li class="covered" data-hits="258" data-linenumber="97">
-          <span class="hits">258</span>
+        <li class="covered" data-hits="266" data-linenumber="97">
+          <span class="hits">266</span>
           
           <code class="ruby">        response = @client.request(options)</code>
         </li>
@@ -1382,14 +1382,14 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="256" data-linenumber="115">
-          <span class="hits">256</span>
+        <li class="covered" data-hits="264" data-linenumber="115">
+          <span class="hits">264</span>
           
           <code class="ruby">      begin</code>
         </li>
       
-        <li class="covered" data-hits="256" data-linenumber="116">
-          <span class="hits">256</span>
+        <li class="covered" data-hits="264" data-linenumber="116">
+          <span class="hits">264</span>
           
           <code class="ruby">        response.body = JSON.load(response.body) if (response.get_header(&quot;Content-Type&quot;) || &quot;&quot;).include?(&quot;application/json&quot;)</code>
         </li>
@@ -1418,8 +1418,8 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="256" data-linenumber="121">
-          <span class="hits">256</span>
+        <li class="covered" data-hits="264" data-linenumber="121">
+          <span class="hits">264</span>
           
           <code class="ruby">      return response</code>
         </li>
@@ -1442,26 +1442,26 @@
           <code class="ruby">    def request_all(collection_key, options = {})</code>
         </li>
       
-        <li class="covered" data-hits="49" data-linenumber="125">
-          <span class="hits">49</span>
+        <li class="covered" data-hits="52" data-linenumber="125">
+          <span class="hits">52</span>
           
           <code class="ruby">      begin</code>
         </li>
       
-        <li class="covered" data-hits="49" data-linenumber="126">
-          <span class="hits">49</span>
+        <li class="covered" data-hits="52" data-linenumber="126">
+          <span class="hits">52</span>
           
           <code class="ruby">        absolute_limit = options[:query][:limit]</code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="127">
-          <span class="hits">10</span>
+        <li class="covered" data-hits="13" data-linenumber="127">
+          <span class="hits">13</span>
           
           <code class="ruby">        limit = [absolute_limit, 10].min</code>
         </li>
       
-        <li class="covered" data-hits="6" data-linenumber="128">
-          <span class="hits">6</span>
+        <li class="covered" data-hits="7" data-linenumber="128">
+          <span class="hits">7</span>
           
           <code class="ruby">        options[:query][:limit] = limit if options[:query][:limit]</code>
         </li>
@@ -1472,14 +1472,14 @@
           <code class="ruby">      rescue</code>
         </li>
       
-        <li class="covered" data-hits="43" data-linenumber="130">
-          <span class="hits">43</span>
+        <li class="covered" data-hits="45" data-linenumber="130">
+          <span class="hits">45</span>
           
           <code class="ruby">        absolute_limit = Float::INFINITY</code>
         </li>
       
-        <li class="covered" data-hits="43" data-linenumber="131">
-          <span class="hits">43</span>
+        <li class="covered" data-hits="45" data-linenumber="131">
+          <span class="hits">45</span>
           
           <code class="ruby">        limit = 10</code>
         </li>
@@ -1496,10 +1496,10 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="49" data-linenumber="134">
-          <span class="hits">49</span>
+        <li class="covered" data-hits="52" data-linenumber="134">
+          <span class="hits">52</span>
           
-          <code class="ruby">      response = request(options)</code>
+          <code class="ruby">      first_response = response = request(options)</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="135">
@@ -1508,10 +1508,10 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="49" data-linenumber="136">
-          <span class="hits">49</span>
+        <li class="covered" data-hits="52" data-linenumber="136">
+          <span class="hits">52</span>
           
-          <code class="ruby">      if collection_key and response.status != 204</code>
+          <code class="ruby">      if collection_key and first_response.status != 204</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="137">
@@ -1520,8 +1520,8 @@
           <code class="ruby">        # the next href link will have the query represented in it</code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="138">
-          <span class="hits">10</span>
+        <li class="covered" data-hits="12" data-linenumber="138">
+          <span class="hits">12</span>
           
           <code class="ruby">        options.delete :query</code>
         </li>
@@ -1532,106 +1532,106 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="140">
-          <span class="hits">10</span>
+        <li class="covered" data-hits="12" data-linenumber="140">
+          <span class="hits">12</span>
           
-          <code class="ruby">        collection = response.body[collection_key]</code>
+          <code class="ruby">        collection = first_response.body[collection_key]</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="141">
+        <li class="covered" data-hits="12" data-linenumber="141">
+          <span class="hits">12</span>
+          
+          <code class="ruby">        last_links = first_response.body[&quot;links&quot;]</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="142">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="142">
-          <span class="hits">10</span>
+        <li class="covered" data-hits="12" data-linenumber="143">
+          <span class="hits">12</span>
           
           <code class="ruby">        while response.body[collection_key].count &gt;= limit and collection.count &lt; absolute_limit</code>
         </li>
       
-        <li class="covered" data-hits="20" data-linenumber="143">
-          <span class="hits">20</span>
+        <li class="covered" data-hits="22" data-linenumber="144">
+          <span class="hits">22</span>
           
           <code class="ruby">          next_link = response.body[&quot;links&quot;].select{|l| l[&quot;rel&quot;] == &quot;next&quot; }[0][&quot;href&quot;]</code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="144">
-          <span class="hits">10</span>
+        <li class="covered" data-hits="11" data-linenumber="145">
+          <span class="hits">11</span>
           
           <code class="ruby">          options[:path] = set_query_from(options[:path], next_link)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="145">
+        <li class="never" data-hits="" data-linenumber="146">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="146">
-          <span class="hits">10</span>
+        <li class="covered" data-hits="11" data-linenumber="147">
+          <span class="hits">11</span>
           
           <code class="ruby">          response = request(options)</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="147">
+        <li class="never" data-hits="" data-linenumber="148">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="148">
-          <span class="hits">10</span>
+        <li class="covered" data-hits="11" data-linenumber="149">
+          <span class="hits">11</span>
           
           <code class="ruby">          break if response.status == 204</code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="149">
-          <span class="hits">10</span>
+        <li class="covered" data-hits="11" data-linenumber="150">
+          <span class="hits">11</span>
           
           <code class="ruby">          collection += response.body[collection_key]</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="150">
+        <li class="covered" data-hits="11" data-linenumber="151">
+          <span class="hits">11</span>
+          
+          <code class="ruby">          last_links = response.body[&quot;links&quot;]</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="152">
           
           
           <code class="ruby">        end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="151">
-          
-          
-          <code class="ruby"></code>
-        </li>
-      
-        <li class="covered" data-hits="10" data-linenumber="152">
-          <span class="hits">10</span>
-          
-          <code class="ruby">        response.body[collection_key] = collection</code>
-        </li>
-      
         <li class="never" data-hits="" data-linenumber="153">
           
           
-          <code class="ruby">      end</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="154">
-          
-          
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="49" data-linenumber="155">
-          <span class="hits">49</span>
+        <li class="covered" data-hits="12" data-linenumber="154">
+          <span class="hits">12</span>
           
-          <code class="ruby">      return response</code>
+          <code class="ruby">        first_response.body[collection_key] = collection</code>
+        </li>
+      
+        <li class="covered" data-hits="12" data-linenumber="155">
+          <span class="hits">12</span>
+          
+          <code class="ruby">        first_response.body[&quot;links&quot;] = last_links</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="156">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby">      end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="157">
@@ -1640,79 +1640,97 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="158">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="52" data-linenumber="158">
+          <span class="hits">52</span>
           
-          <code class="ruby">    private</code>
+          <code class="ruby">      return first_response</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="159">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">    end</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="160">
           
           
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="161">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    private</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="162">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="163">
+          
+          
           <code class="ruby">    # I would just like to comment that this is only necessary because the API does not return the correct</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="161">
+        <li class="never" data-hits="" data-linenumber="164">
           
           
           <code class="ruby">    # href for the next page.  The tenant id (account number) is missing from between the /v1 and /queues.</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="162">
+        <li class="covered" data-hits="1" data-linenumber="165">
           <span class="hits">1</span>
           
           <code class="ruby">    def set_query_from(original, new_uri)</code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="163">
-          <span class="hits">10</span>
+        <li class="covered" data-hits="11" data-linenumber="166">
+          <span class="hits">11</span>
           
           <code class="ruby">      original = URI.parse(original)</code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="164">
-          <span class="hits">10</span>
+        <li class="covered" data-hits="11" data-linenumber="167">
+          <span class="hits">11</span>
           
           <code class="ruby">      new_query = URI.parse(new_uri).query</code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="165">
-          <span class="hits">10</span>
+        <li class="covered" data-hits="11" data-linenumber="168">
+          <span class="hits">11</span>
           
           <code class="ruby">      original.query = new_query</code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="166">
-          <span class="hits">10</span>
+        <li class="covered" data-hits="11" data-linenumber="169">
+          <span class="hits">11</span>
           
           <code class="ruby">      return original.to_s</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="167">
+        <li class="never" data-hits="" data-linenumber="170">
           
           
           <code class="ruby">    end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="168">
+        <li class="never" data-hits="" data-linenumber="171">
           
           
           <code class="ruby">  </code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="169">
+        <li class="never" data-hits="" data-linenumber="172">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="170">
+        <li class="never" data-hits="" data-linenumber="173">
           
           
           <code class="ruby">end</code>
@@ -1772,14 +1790,14 @@
           <code class="ruby">    def initialize(queue, message)</code>
         </li>
       
-        <li class="covered" data-hits="268" data-linenumber="7">
-          <span class="hits">268</span>
+        <li class="covered" data-hits="288" data-linenumber="7">
+          <span class="hits">288</span>
           
           <code class="ruby">      @client = queue.client</code>
         </li>
       
-        <li class="covered" data-hits="268" data-linenumber="8">
-          <span class="hits">268</span>
+        <li class="covered" data-hits="288" data-linenumber="8">
+          <span class="hits">288</span>
           
           <code class="ruby">      @queue = queue.name</code>
         </li>
@@ -1790,38 +1808,38 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="268" data-linenumber="10">
-          <span class="hits">268</span>
+        <li class="covered" data-hits="288" data-linenumber="10">
+          <span class="hits">288</span>
           
           <code class="ruby">      href = URI.parse(message[&quot;href&quot;])</code>
         </li>
       
-        <li class="covered" data-hits="268" data-linenumber="11">
-          <span class="hits">268</span>
+        <li class="covered" data-hits="288" data-linenumber="11">
+          <span class="hits">288</span>
           
           <code class="ruby">      @id = href.path.split('/')[-1]</code>
         </li>
       
-        <li class="covered" data-hits="268" data-linenumber="12">
-          <span class="hits">268</span>
+        <li class="covered" data-hits="288" data-linenumber="12">
+          <span class="hits">288</span>
           
           <code class="ruby">      @claim = href.query.match(/(^|&amp;)claim_id=([^&amp;]+)/)[2] rescue nil</code>
         </li>
       
-        <li class="covered" data-hits="268" data-linenumber="13">
-          <span class="hits">268</span>
+        <li class="covered" data-hits="288" data-linenumber="13">
+          <span class="hits">288</span>
           
           <code class="ruby">      @body = message[&quot;body&quot;]</code>
         </li>
       
-        <li class="covered" data-hits="268" data-linenumber="14">
-          <span class="hits">268</span>
+        <li class="covered" data-hits="288" data-linenumber="14">
+          <span class="hits">288</span>
           
           <code class="ruby">      @age = message[&quot;age&quot;]</code>
         </li>
       
-        <li class="covered" data-hits="268" data-linenumber="15">
-          <span class="hits">268</span>
+        <li class="covered" data-hits="288" data-linenumber="15">
+          <span class="hits">288</span>
           
           <code class="ruby">      @ttl = message[&quot;ttl&quot;]</code>
         </li>
@@ -2051,8 +2069,8 @@
     <h3>lib/cloud-queues/messages.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>20</b> relevant lines. 
-      <span class="green"><b>20</b> lines covered</span> and
+      <b>24</b> relevant lines. 
+      <span class="green"><b>24</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -2114,14 +2132,14 @@
           <code class="ruby">    def initialize(queue, msgs, links)</code>
         </li>
       
-        <li class="covered" data-hits="60" data-linenumber="10">
-          <span class="hits">60</span>
+        <li class="covered" data-hits="62" data-linenumber="10">
+          <span class="hits">62</span>
           
           <code class="ruby">      @queue = queue</code>
         </li>
       
-        <li class="covered" data-hits="60" data-linenumber="11">
-          <span class="hits">60</span>
+        <li class="covered" data-hits="62" data-linenumber="11">
+          <span class="hits">62</span>
           
           <code class="ruby">      @messages = msgs</code>
         </li>
@@ -2132,8 +2150,8 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="60" data-linenumber="13">
-          <span class="hits">60</span>
+        <li class="covered" data-hits="62" data-linenumber="13">
+          <span class="hits">62</span>
           
           <code class="ruby">      @marker = find_marker links if links</code>
         </li>
@@ -2156,8 +2174,8 @@
           <code class="ruby">    def each(&amp;block)</code>
         </li>
       
-        <li class="covered" data-hits="51" data-linenumber="17">
-          <span class="hits">51</span>
+        <li class="covered" data-hits="52" data-linenumber="17">
+          <span class="hits">52</span>
           
           <code class="ruby">      @messages.each(&amp;block)</code>
         </li>
@@ -2204,94 +2222,94 @@
           <code class="ruby">    def next(options = {})</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="25">
-          <span class="hits">1</span>
+        <li class="covered" data-hits="3" data-linenumber="25">
+          <span class="hits">3</span>
           
           <code class="ruby">      if @marker</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="26">
+        <li class="covered" data-hits="3" data-linenumber="26">
+          <span class="hits">3</span>
+          
+          <code class="ruby">        more = @queue.messages options.merge(marker: @marker)</code>
+        </li>
+      
+        <li class="covered" data-hits="3" data-linenumber="27">
+          <span class="hits">3</span>
+          
+          <code class="ruby">        if more.class == Array and more.count == 0</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="28">
           <span class="hits">1</span>
           
-          <code class="ruby">        @queue.messages options.merge(marker: @marker)</code>
+          <code class="ruby">          @messages = more</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="27">
+        <li class="covered" data-hits="1" data-linenumber="29">
+          <span class="hits">1</span>
           
-          
-          <code class="ruby">      else</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="28">
-          
-          
-          <code class="ruby">        # We don't have a next marker because this set of messages was</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="29">
-          
-          
-          <code class="ruby">        # never intended to be part of a larger set.</code>
+          <code class="ruby">          return self</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="30">
           
           
-          <code class="ruby">        nil</code>
+          <code class="ruby">        end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="31">
+        <li class="covered" data-hits="2" data-linenumber="31">
+          <span class="hits">2</span>
           
-          
-          <code class="ruby">      end</code>
+          <code class="ruby">        return more</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="32">
           
           
-          <code class="ruby">    end</code>
+          <code class="ruby">      else</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="33">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">        # We don't have a next marker because this set of messages was</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="34">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="34">
           
-          <code class="ruby">    private</code>
+          
+          <code class="ruby">        # never intended to be part of a larger set.</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="35">
           
           
-          <code class="ruby"></code>
+          <code class="ruby">        return nil</code>
         </li>
       
-        <li class="covered" data-hits="1" data-linenumber="36">
-          <span class="hits">1</span>
+        <li class="never" data-hits="" data-linenumber="36">
           
-          <code class="ruby">    def find_marker(links)</code>
-        </li>
-      
-        <li class="covered" data-hits="18" data-linenumber="37">
-          <span class="hits">18</span>
           
-          <code class="ruby">      uri = URI.parse(links.select{|link| link[&quot;rel&quot;] == &quot;next&quot; }[0][&quot;href&quot;])</code>
+          <code class="ruby">      end</code>
         </li>
       
-        <li class="covered" data-hits="9" data-linenumber="38">
-          <span class="hits">9</span>
-          
-          <code class="ruby">      return uri.query.match(/marker=([^&amp;]+)/)[1]</code>
-        </li>
-      
-        <li class="never" data-hits="" data-linenumber="39">
+        <li class="never" data-hits="" data-linenumber="37">
           
           
           <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="38">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="39">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    private</code>
         </li>
       
         <li class="never" data-hits="" data-linenumber="40">
@@ -2300,13 +2318,43 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="41">
+        <li class="covered" data-hits="1" data-linenumber="41">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    def find_marker(links)</code>
+        </li>
+      
+        <li class="covered" data-hits="22" data-linenumber="42">
+          <span class="hits">22</span>
+          
+          <code class="ruby">      uri = URI.parse(links.select{|link| link[&quot;rel&quot;] == &quot;next&quot; }[0][&quot;href&quot;])</code>
+        </li>
+      
+        <li class="covered" data-hits="11" data-linenumber="43">
+          <span class="hits">11</span>
+          
+          <code class="ruby">      return uri.query.match(/marker=([^&amp;]+)/)[1]</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="44">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="45">
+          
+          
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="46">
           
           
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="42">
+        <li class="never" data-hits="" data-linenumber="47">
           
           
           <code class="ruby">end</code>
@@ -2378,14 +2426,14 @@
           <code class="ruby">    def initialize(client, name)</code>
         </li>
       
-        <li class="covered" data-hits="51" data-linenumber="9">
-          <span class="hits">51</span>
+        <li class="covered" data-hits="52" data-linenumber="9">
+          <span class="hits">52</span>
           
           <code class="ruby">      @client = client</code>
         </li>
       
-        <li class="covered" data-hits="51" data-linenumber="10">
-          <span class="hits">51</span>
+        <li class="covered" data-hits="52" data-linenumber="10">
+          <span class="hits">52</span>
           
           <code class="ruby">      @name = name</code>
         </li>
@@ -2408,8 +2456,8 @@
           <code class="ruby">      # to always work out the way we want</code>
         </li>
       
-        <li class="covered" data-hits="51" data-linenumber="14">
-          <span class="hits">51</span>
+        <li class="covered" data-hits="52" data-linenumber="14">
+          <span class="hits">52</span>
           
           <code class="ruby">      @default_ttl = 1209600 # 14 days, server max</code>
         </li>
@@ -2420,14 +2468,14 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="51" data-linenumber="16">
-          <span class="hits">51</span>
+        <li class="covered" data-hits="52" data-linenumber="16">
+          <span class="hits">52</span>
           
           <code class="ruby">      @default_claim_ttl = 43200 # 12 hours, server max</code>
         </li>
       
-        <li class="covered" data-hits="51" data-linenumber="17">
-          <span class="hits">51</span>
+        <li class="covered" data-hits="52" data-linenumber="17">
+          <span class="hits">52</span>
           
           <code class="ruby">      @default_claim_grace = 300 # 5 minutes, arbitrary</code>
         </li>
@@ -2450,8 +2498,8 @@
           <code class="ruby">    def messages(options = {})</code>
         </li>
       
-        <li class="covered" data-hits="47" data-linenumber="21">
-          <span class="hits">47</span>
+        <li class="covered" data-hits="50" data-linenumber="21">
+          <span class="hits">50</span>
           
           <code class="ruby">      if options[:ids]</code>
         </li>
@@ -2474,8 +2522,8 @@
           <code class="ruby">      else</code>
         </li>
       
-        <li class="covered" data-hits="10" data-linenumber="25">
-          <span class="hits">10</span>
+        <li class="covered" data-hits="13" data-linenumber="25">
+          <span class="hits">13</span>
           
           <code class="ruby">        allowed_query = %w[marker limit echo include_claimed]</code>
         </li>
@@ -2492,8 +2540,8 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="94" data-linenumber="28">
-          <span class="hits">94</span>
+        <li class="covered" data-hits="100" data-linenumber="28">
+          <span class="hits">100</span>
           
           <code class="ruby">      options = options.select { |opt| allowed_query.include?(opt.to_s) }</code>
         </li>
@@ -2510,8 +2558,8 @@
           <code class="ruby">      # Excon likes to CGI.escape values in a query hash, so this has to be handled manually</code>
         </li>
       
-        <li class="covered" data-hits="46" data-linenumber="31">
-          <span class="hits">46</span>
+        <li class="covered" data-hits="49" data-linenumber="31">
+          <span class="hits">49</span>
           
           <code class="ruby">      if options[:ids]</code>
         </li>
@@ -2558,8 +2606,8 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="46" data-linenumber="39">
-          <span class="hits">46</span>
+        <li class="covered" data-hits="49" data-linenumber="39">
+          <span class="hits">49</span>
           
           <code class="ruby">      response = @client.request_all(options.class == String ? nil : &quot;messages&quot;,</code>
         </li>
@@ -2570,20 +2618,20 @@
           <code class="ruby">                                     method: :get, path: &quot;#{path}/messages&quot;, expects: [200, 204], query: options)</code>
         </li>
       
-        <li class="covered" data-hits="46" data-linenumber="41">
-          <span class="hits">46</span>
+        <li class="covered" data-hits="49" data-linenumber="41">
+          <span class="hits">49</span>
           
           <code class="ruby">      return [] if response.status == 204</code>
         </li>
       
-        <li class="covered" data-hits="45" data-linenumber="42">
-          <span class="hits">45</span>
+        <li class="covered" data-hits="47" data-linenumber="42">
+          <span class="hits">47</span>
           
           <code class="ruby">      if response.body.class == Hash</code>
         </li>
       
-        <li class="covered" data-hits="9" data-linenumber="43">
-          <span class="hits">9</span>
+        <li class="covered" data-hits="11" data-linenumber="43">
+          <span class="hits">11</span>
           
           <code class="ruby">        return process_messages(response.body[&quot;messages&quot;], response.body[&quot;links&quot;])</code>
         </li>
@@ -2660,8 +2708,8 @@
           <code class="ruby">    def put(*msgs)</code>
         </li>
       
-        <li class="covered" data-hits="50" data-linenumber="56">
-          <span class="hits">50</span>
+        <li class="covered" data-hits="52" data-linenumber="56">
+          <span class="hits">52</span>
           
           <code class="ruby">      raise ArgumentError.new(&quot;Only 10 or less messages may be given at once&quot;) if msgs.count &gt; 10</code>
         </li>
@@ -2672,20 +2720,20 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="49" data-linenumber="58">
-          <span class="hits">49</span>
+        <li class="covered" data-hits="51" data-linenumber="58">
+          <span class="hits">51</span>
           
           <code class="ruby">      msgs = msgs.map do |message|</code>
         </li>
       
-        <li class="covered" data-hits="331" data-linenumber="59">
-          <span class="hits">331</span>
+        <li class="covered" data-hits="351" data-linenumber="59">
+          <span class="hits">351</span>
           
           <code class="ruby">        begin</code>
         </li>
       
-        <li class="covered" data-hits="331" data-linenumber="60">
-          <span class="hits">331</span>
+        <li class="covered" data-hits="351" data-linenumber="60">
+          <span class="hits">351</span>
           
           <code class="ruby">          if message.class == Message</code>
         </li>
@@ -2750,8 +2798,8 @@
           <code class="ruby">        rescue</code>
         </li>
       
-        <li class="covered" data-hits="317" data-linenumber="71">
-          <span class="hits">317</span>
+        <li class="covered" data-hits="337" data-linenumber="71">
+          <span class="hits">337</span>
           
           <code class="ruby">          { ttl: @default_ttl, body: message }</code>
         </li>
@@ -2780,14 +2828,14 @@
           <code class="ruby">      # TODO this should probably do something with a body[&quot;partial&quot;] == true response</code>
         </li>
       
-        <li class="covered" data-hits="49" data-linenumber="76">
-          <span class="hits">49</span>
+        <li class="covered" data-hits="51" data-linenumber="76">
+          <span class="hits">51</span>
           
           <code class="ruby">      resources = @client.request(method: :post, path: &quot;#{path}/messages&quot;, body: msgs, expects: 201).body[&quot;resources&quot;]</code>
         </li>
       
-        <li class="covered" data-hits="380" data-linenumber="77">
-          <span class="hits">380</span>
+        <li class="covered" data-hits="402" data-linenumber="77">
+          <span class="hits">402</span>
           
           <code class="ruby">      resources.map { |resource| URI.parse(resource).path.split('/')[-1] }</code>
         </li>
@@ -2912,8 +2960,8 @@
           <code class="ruby">    def delete!</code>
         </li>
       
-        <li class="covered" data-hits="33" data-linenumber="98">
-          <span class="hits">33</span>
+        <li class="covered" data-hits="34" data-linenumber="98">
+          <span class="hits">34</span>
           
           <code class="ruby">      @client.request(method: :delete, path: &quot;#{path}&quot;, expects: 204) &amp;&amp; true</code>
         </li>
@@ -3128,8 +3176,8 @@
           <code class="ruby">    def path</code>
         </li>
       
-        <li class="covered" data-hits="182" data-linenumber="134">
-          <span class="hits">182</span>
+        <li class="covered" data-hits="188" data-linenumber="134">
+          <span class="hits">188</span>
           
           <code class="ruby">      &quot;/queues/#{@name}&quot;</code>
         </li>
@@ -3164,8 +3212,8 @@
           <code class="ruby">    def process_messages(msgs, links = nil)</code>
         </li>
       
-        <li class="covered" data-hits="307" data-linenumber="140">
-          <span class="hits">307</span>
+        <li class="covered" data-hits="329" data-linenumber="140">
+          <span class="hits">329</span>
           
           <code class="ruby">      Messages.new(self, msgs.map{|msg| process_message(msg) }, links)</code>
         </li>
@@ -3188,8 +3236,8 @@
           <code class="ruby">    def process_message(msg)</code>
         </li>
       
-        <li class="covered" data-hits="261" data-linenumber="144">
-          <span class="hits">261</span>
+        <li class="covered" data-hits="281" data-linenumber="144">
+          <span class="hits">281</span>
           
           <code class="ruby">      Message.new(self, msg)</code>
         </li>
@@ -3326,14 +3374,14 @@
           <code class="ruby">  def get(args = {})</code>
         </li>
       
-        <li class="covered" data-hits="45" data-linenumber="12">
-          <span class="hits">45</span>
+        <li class="covered" data-hits="46" data-linenumber="12">
+          <span class="hits">46</span>
           
           <code class="ruby">    key = args[:region] || :default</code>
         </li>
       
-        <li class="covered" data-hits="45" data-linenumber="13">
-          <span class="hits">45</span>
+        <li class="covered" data-hits="46" data-linenumber="13">
+          <span class="hits">46</span>
           
           <code class="ruby">    return @house[key] if @house.include?(key)</code>
         </li>
@@ -3410,8 +3458,8 @@
           <code class="ruby">  let(:client) do</code>
         </li>
       
-        <li class="covered" data-hits="43" data-linenumber="26">
-          <span class="hits">43</span>
+        <li class="covered" data-hits="44" data-linenumber="26">
+          <span class="hits">44</span>
           
           <code class="ruby">    ClientWarehouse.instance.get</code>
         </li>
@@ -4541,8 +4589,8 @@
     <h3>spec/messages_spec.rb</h3>
     <h4><span class="green">100.0 %</span> covered</h4>
     <div>
-      <b>24</b> relevant lines. 
-      <span class="green"><b>24</b> lines covered</span> and
+      <b>29</b> relevant lines. 
+      <span class="green"><b>29</b> lines covered</span> and
       <span class="red"><b>0</b> lines missed.</span>
     </div>
   </div>
@@ -4592,26 +4640,26 @@
           <code class="ruby">  before do</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="8">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="5" data-linenumber="8">
+          <span class="hits">5</span>
           
           <code class="ruby">    @name = Faker::Lorem.words.join('-')</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="9">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="5" data-linenumber="9">
+          <span class="hits">5</span>
           
           <code class="ruby">    @queue = client.create @name</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="10">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="5" data-linenumber="10">
+          <span class="hits">5</span>
           
           <code class="ruby">    @queue.put 1, 2, 3, 4, 5, 6, 7, 8, 9, 10</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="11">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="5" data-linenumber="11">
+          <span class="hits">5</span>
           
           <code class="ruby">    @queue.put 11, 12, 13, 14, 15, 16, 17, 18, 19, 20</code>
         </li>
@@ -4622,14 +4670,14 @@
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="13">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="5" data-linenumber="13">
+          <span class="hits">5</span>
           
           <code class="ruby">    client.client_id = SecureRandom.uuid</code>
         </li>
       
-        <li class="covered" data-hits="4" data-linenumber="14">
-          <span class="hits">4</span>
+        <li class="covered" data-hits="5" data-linenumber="14">
+          <span class="hits">5</span>
           
           <code class="ruby">    @messages = @queue.messages limit: 5</code>
         </li>
@@ -4763,28 +4811,70 @@
         <li class="never" data-hits="" data-linenumber="36">
           
           
+          <code class="ruby"></code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="37">
+          <span class="hits">1</span>
+          
+          <code class="ruby">    it &quot;returns itself when we ask for more that aren't there&quot; do</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="38">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      more_messages = @messages.next</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="39">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      no_more_messages = more_messages.next</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="40">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(no_more_messages.count).to eq(0)</code>
+        </li>
+      
+        <li class="covered" data-hits="1" data-linenumber="41">
+          <span class="hits">1</span>
+          
+          <code class="ruby">      expect(no_more_messages).to be_an_instance_of(CloudQueues::Messages)</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="42">
+          
+          
+          <code class="ruby">    end</code>
+        </li>
+      
+        <li class="never" data-hits="" data-linenumber="43">
+          
+          
           <code class="ruby">  end</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="37">
+        <li class="never" data-hits="" data-linenumber="44">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="covered" data-hits="5" data-linenumber="38">
-          <span class="hits">5</span>
+        <li class="covered" data-hits="6" data-linenumber="45">
+          <span class="hits">6</span>
           
           <code class="ruby">  after { @queue.delete! }</code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="39">
+        <li class="never" data-hits="" data-linenumber="46">
           
           
           <code class="ruby"></code>
         </li>
       
-        <li class="never" data-hits="" data-linenumber="40">
+        <li class="never" data-hits="" data-linenumber="47">
           
           
           <code class="ruby">end</code>
