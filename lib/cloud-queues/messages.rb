@@ -23,11 +23,16 @@ module CloudQueues
 
     def next(options = {})
       if @marker
-        @queue.messages options.merge(marker: @marker)
+        more = @queue.messages options.merge(marker: @marker)
+        if more.class == Array and more.count == 0
+          @messages = more
+          return self
+        end
+        return more
       else
         # We don't have a next marker because this set of messages was
         # never intended to be part of a larger set.
-        nil
+        return nil
       end
     end
 

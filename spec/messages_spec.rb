@@ -33,6 +33,13 @@ describe "a set of messages" do
       more_messages = @messages.next
       expect(more_messages.count).to eq(15)
     end
+
+    it "returns itself when we ask for more that aren't there" do
+      more_messages = @messages.next
+      no_more_messages = more_messages.next
+      expect(no_more_messages.count).to eq(0)
+      expect(no_more_messages).to be_an_instance_of(CloudQueues::Messages)
+    end
   end
 
   after { @queue.delete! }

@@ -131,13 +131,14 @@ module CloudQueues
         limit = 10
       end
 
-      response = request(options)
+      first_response = response = request(options)
 
-      if collection_key and response.status != 204
+      if collection_key and first_response.status != 204
         # the next href link will have the query represented in it
         options.delete :query
 
-        collection = response.body[collection_key]
+        collection = first_response.body[collection_key]
+        last_links = first_response.body["links"]
 
         while response.body[collection_key].count >= limit and collection.count < absolute_limit
           next_link = response.body["links"].select{|l| l["rel"] == "next" }[0]["href"]
@@ -147,12 +148,14 @@ module CloudQueues
 
           break if response.status == 204
           collection += response.body[collection_key]
+          last_links = response.body["links"]
         end
 
-        response.body[collection_key] = collection
+        first_response.body[collection_key] = collection
+        first_response.body["links"] = last_links
       end
 
-      return response
+      return first_response
     end
 
     private
