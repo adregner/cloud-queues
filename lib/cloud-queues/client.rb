@@ -75,7 +75,7 @@ module CloudQueues
       @client = Excon.new(@api_host, tcp_nodelay: true)
     end
   
-    def request(options = {}, second_try = false)
+    def request(options = {}, second_try = [])
       if options[:body] and options[:body].class != String
         options[:body] = options[:body].to_json
       end
@@ -96,20 +96,20 @@ module CloudQueues
       begin
         response = @client.request(options)
       rescue Excon::Errors::SocketError => e
-        raise unless e.message.include?("EOFError") or second_try
+        raise unless e.message.include?("EOFError") or second_try.include?(:socketerror)
 
         # this happens when the server closes the keep-alive socket and
         # Excon doesn't realize it yet.
         @client.reset
-        return request(options, true)
+        return request(options, second_try + [:socketerror])
       rescue Excon::Errors::Unauthorized => e
-        raise if second_try or @token.nil?
+        raise if second_try.include?(:unauth) or @token.nil?
 
         # Our @token probably expired, re-auth and try again
         @token = nil
         authenticate!
         @client.reset # for good measure
-        return request(options, true)
+        return request(options, second_try + [:unauth])
       end
 
       begin
