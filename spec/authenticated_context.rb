@@ -15,8 +15,8 @@ class ClientWarehouse
   end
 
   def build(key)
-    if ENV['RACKSPACE_SPEC_CREDS']
-      args = YAML.load(ENV['RACKSPACE_SPEC_CREDS'])
+    if ENV['RACKSPACE_SPEC_CREDS_USERNAME'] and ENV['RACKSPACE_SPEC_CREDS_KEY']
+      args = {username: ENV['RACKSPACE_SPEC_CREDS_USERNAME'], api_key: ENV['RACKSPACE_SPEC_CREDS_KEY']}
     else
       args = YAML.load_file(File.realpath("../../.rackspace-spec-creds", __FILE__))
     end
