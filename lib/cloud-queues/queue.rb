@@ -46,6 +46,25 @@ module CloudQueues
       end
     end
 
+    def subscribe(options = {}, &block)
+      interval = options.delete(:interval) || 30
+      count = options.delete(:count) || -1
+      options[:marker] ||= 0
+
+      return if count == 0
+
+      loop do
+        these = messages(options).each do |message|
+          block.call(message)
+          count -= 1 if count > 0
+          return if count == 0
+        end
+
+        options[:marker] = these.marker
+        sleep interval
+      end
+    end
+
     def get(id, options = {})
       options = options[:claim_id] ? {claim_id: options[:claim_id]} : {}
       msgs = @client.request(method: :get, path: "#{path}/messages/#{id}", query: options)
