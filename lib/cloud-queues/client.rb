@@ -95,6 +95,13 @@ module CloudQueues
   
       begin
         response = @client.request(options)
+      rescue Excon::Errors::ServiceUnavailable, Excon::Errors::InternalServerError
+        raise unless second_try.include?(:servererror)
+
+        # let the API barf once, and wait to retry
+        @client.reset
+        sleep 0.2
+        return request(options, second_try + [:servererror])
       rescue Excon::Errors::SocketError => e
         raise unless e.message.include?("EOFError") or second_try.include?(:socketerror)
 
