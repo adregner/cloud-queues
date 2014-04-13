@@ -24,7 +24,7 @@ describe "working with messages" do
       end
 
       it "should have some handy methods" do
-        sleep 1 # just to make sure it's old enough
+        sleep 1.5 # just to make sure it's old enough
         @message = @queue.get @message.id
 
         expect(@message.age).to eq(1)
