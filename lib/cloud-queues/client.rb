@@ -79,8 +79,8 @@ module CloudQueues
       if options[:body] and options[:body].class != String
         options[:body] = options[:body].to_json
       end
-  
-      options[:path] = "#{@base_path}#{options[:path]}" unless options[:path].start_with?(@base_path)
+ 
+      options[:path] = "#{@base_path}#{options[:path]}" unless not @base_path.nil? and options[:path].start_with?(@base_path)
   
       options[:headers] ||= {}
       options[:headers]["Content-Type"] = "application/json" if options[:body]
